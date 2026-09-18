@@ -1,0 +1,54 @@
+# Token prices, USD per 1 million tokens. One copy for the whole course.
+#
+# WHY THIS FILE EXISTS
+#   From S03 the assistant reports what it costs. Prices are neither model
+#   constants nor secrets, so they belong with the other shared fixtures rather
+#   than in a snapshot's config.py or in .env — and like tickets.yml, one copy
+#   means the whole course moves together when a price changes.
+#
+# THIS FILE IS STALE. THAT IS THE POINT.
+#   Every entry carries the date it was checked. Providers change prices with
+#   little notice — look at gemini-3.6-flash below, which already has an increase
+#   scheduled — so treat these as a worked example, not as truth. Checking today's
+#   real number is a two-minute exercise and part of the job:
+#       https://ai.google.dev/gemini-api/docs/pricing
+#
+# Free tier: every model here has one. These prices are what you pay AFTER you
+#   enable billing. Nothing in this course requires that.
+#
+# Fields
+#   id        the model ID exactly as passed to the SDK
+#   input     USD per 1M input tokens, paid tier
+#   output    USD per 1M output tokens, paid tier (always dearer than input)
+#   verified  the day someone actually looked
+#   note      anything that will make this wrong sooner than usual
+
+- id: gemini-3.1-flash-lite
+  input: 0.25
+  output: 1.50
+  verified: "2026-08-30"
+  note: "The course default. Cheapest tier that still follows a guarded prompt."
+
+- id: gemini-3.6-flash
+  input: 0.75
+  output: 3.75
+  verified: "2026-08-30"
+  note: >-
+    Promotional pricing through 2026-12-31; both figures DOUBLE on 2027-01-01
+    (to 1.50 / 7.50). A cost model built today is wrong in January — which is
+    exactly why this file has a verified date instead of pretending to be right.
+
+- id: gemini-2.5-pro
+  input: 1.25
+  output: 10.00
+  verified: "2026-08-30"
+  note: >-
+    Prices step up for prompts over 200k tokens (2.50 / 15.00). Long-context
+    work is not priced like short-context work — worth knowing before S09 starts
+    stuffing retrieved passages into every call.
+
+- id: gemini-embedding-2
+  input: 0.15
+  output: 0.0
+  verified: "2026-08-30"
+  note: "Embeddings have no output price — you get vectors, not tokens. Used from S08."

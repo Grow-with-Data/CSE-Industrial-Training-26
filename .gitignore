@@ -1,0 +1,57 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Secrets — never commit a key. A key in a commit is a key on the internet;
+# treat one that leaks as already spent and revoke it in AI Studio.
+# ─────────────────────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Instructor-only material — never ships, at any point in the course.
+# ─────────────────────────────────────────────────────────────────────────────
+*-instructor.ipynb
+*instructor*
+course-design/
+cohorts/
+roster.csv
+*.private.*
+
+# ─────────────────────────────────────────────────────────────────────────────
+# solutions.ipynb is deliberately NOT listed above.
+#
+# Solutions ship one session late: session N's solutions are published together
+# with session N+1, once that exercise has been reviewed in class. So the file
+# is withheld by *timing*, not by git.
+#
+# Ignoring it would be an expensive mistake — at the session 2 release
+# `git add session-01/solutions.ipynb` would silently do nothing, and the
+# omission would only surface when a student asked where the solutions were.
+#
+# What actually enforces the timing: only the intended files are copied into
+# this repo, and the full manifest is reviewed before every push.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Environment & build
+# ─────────────────────────────────────────────────────────────────────────────
+.venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+node_modules/
+
+# Local vector store (session 8 runs Qdrant on your machine)
+.qdrant/
+qdrant_storage/
+
+# Scratch — keep the repo clean; put throwaway experiments here
+scratch/
+test.py
+*.log
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OS noise
+# ─────────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

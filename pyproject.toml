@@ -1,0 +1,50 @@
+[project]
+name = "shopwise-labs"
+version = "0.1.0"
+description = "ShopWise — hands-on labs for the AI/LLM Application Builder course"
+requires-python = ">=3.12"
+
+# One environment for all 20 sessions. Install once:
+#   uv sync
+# Then select .venv as the Jupyter kernel. Everything a later session needs is
+# already here, so week 8 never opens with a failed install.
+dependencies = [
+    # --- the course's core stack (majors locked in CLAUDE.md) ---
+    "langchain>=1.3.14,<2",
+    "langgraph>=1.2.10,<1.3",     # langchain 1.3.x itself caps langgraph at <1.3
+    "langchain-google-genai>=4.3.2,<5",
+    "google-genai>=2.17,<3",      # >=2.3 required for the Interactions API (S01)
+
+    # --- from S04: one interface, any vendor ---
+    # LangChain's chat model interface is uniform, but each vendor's HTTP client
+    # lives in its own package — swapping providers is an install as well as a
+    # string change. They are plain dependencies, not an optional extras group,
+    # because a session must never open with a failed install: `uv sync` once in
+    # week 1 and every provider S04 demonstrates is already on the machine.
+    # Only Gemini, Groq and Ollama are runnable for free; OpenAI and Anthropic
+    # are installed so their code path is real, and demonstrated from a trace.
+    "langchain-openai>=1.6.0,<2",
+    "langchain-anthropic>=1.7.0,<2",
+    "langchain-groq>=1.1.3,<2",
+    "langchain-ollama>=1.1.0,<2",
+
+    # --- notebooks & basics ---
+    "jupyterlab>=4.4",
+    "python-dotenv>=1.1",
+    "pydantic>=2.11,<3",
+    "pydantic-settings>=2.8",     # typed, validated configuration (S03 — see project/config.py)
+    "pyyaml>=6.0",
+    "pillow>=11.0",               # reading the image the model is shown (S01 §7.3)
+    "mermaid-py>=0.8.4",          # diagrams rendered inside notebooks, from S01 on
+
+    # --- from S08: retrieval ---
+    "qdrant-client>=1.15",
+    "langchain-qdrant>=1.0",
+
+    # --- from S13: serving ---
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.52",
+]
+
+[tool.uv]
+package = false

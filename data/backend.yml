@@ -1,0 +1,171 @@
+# ShopWise's mock backend — the store's own records, for the whole course.
+#
+# ONE copy, beside tickets.yml and prices.yml (ADR-0006). The session snapshot
+# that uses it keeps a five-line loader, not a copy: snapshots are copied
+# forward under ADR-0001, so a module in session-05/project/ would be twelve
+# identical copies by session 16, and a fact corrected in session 11 would be
+# seven edits.
+#
+# WHAT THIS IS, IN THE STORY
+#   Customers, products, orders, shipments and refunds — the tables a real shop
+#   would have in a database. From session 5 the assistant answers from these
+#   and from nothing else, so every fact it states about an order is either in
+#   this file or invented.
+#
+#   In a real system this is your database or your API. It is a YAML file here
+#   for exactly two reasons: it costs nothing to run, and it is committed, so a
+#   participant's notebook still works a month later on a laptop with no
+#   network. The tools in tools.py are the seam; swapping this for a real
+#   backend is a change behind them.
+#
+# WHAT IS DELIBERATE
+#   Content is fixed by PROJECT-SPINE.md §2 and reproduced here exactly. Five
+#   details are teaching hooks that later sessions depend on, so they must
+#   survive any edit to this file:
+#
+#     ORD-5004     delivered 2026-05-07, far outside the 30-day return window
+#                  — the policy-grounded refusal (S09) and the HITL reject (S07)
+#     SKU-300      stock: 0 — replacement-vs-refund, and the honest "out of
+#                  stock" answer the S05 exercise asks for
+#     SKU-400      warranty_months: 0 — the "no warranty" edge case
+#     REF-9001     status: requested, not processed — so asking about a refund's
+#                  status has a non-trivial answer
+#     tier         gold vs regular — S11's store demo and the personalisation
+#                  exercises need two kinds of customer
+#
+#   verify.py checks all five, and checks that every order and email named in
+#   tickets.yml exists below. A demo question quietly losing its answer is the
+#   failure both checks exist to prevent.
+#
+# SHAPE
+#   Five collections, each a mapping. The KEY is the stable identifier — the
+#   thing a tool is handed and looks up — which is why entries here have no
+#   `id:` field the way tickets.yml does. Customers are keyed by email because
+#   that is what a customer types; shipments by order id because that is what a
+#   customer asks about.
+#
+#   Dates are QUOTED, every one of them. Unquoted, pyyaml returns a
+#   datetime.date, and json.dumps then refuses to serialize it — which matters
+#   here more than anywhere else in the course, because a tool's return value is
+#   serialized on its way to the model.
+#
+#   Nothing here is real. Invented people, invented store, invented parcels.
+
+customers:
+  # Keyed by email — what a user naturally provides, and therefore what
+  # lookup_customer takes. customer_id is the key the ORDERS table joins on,
+  # which is why list_orders needs lookup_customer to run first.
+  ayesha@example.com:
+    customer_id: C-1001
+    name: Ayesha Rahman
+    tier: gold
+    since: "2023-02-11"
+  tanvir@example.com:
+    customer_id: C-1002
+    name: Tanvir Ahmed
+    tier: regular
+    since: "2024-07-02"
+  priya@example.com:
+    customer_id: C-1003
+    name: Priya Nair
+    tier: regular
+    since: "2022-11-30"
+  kamal@example.com:
+    customer_id: C-1004
+    name: Kamal Hossain
+    tier: gold
+    since: "2021-05-18"
+
+products:
+  # Keyed by SKU. get_product also matches on name, because customers say "the
+  # kettle" and never "SKU-300" — the fuzzy half of that tool is the lesson.
+  SKU-100:
+    name: AeroSound Pro Headphones
+    product_type: audio
+    price: 129.00
+    stock: 34
+    warranty_months: 12
+  SKU-200:
+    name: PulseFit Smartwatch
+    product_type: wearables
+    price: 199.00
+    stock: 12
+    warranty_months: 24
+  SKU-300:
+    name: BrewMaster Electric Kettle
+    product_type: home
+    price: 49.00
+    stock: 0          # teaching hook: out of stock
+    warranty_months: 6
+  SKU-400:
+    name: TrailPack 30L Backpack
+    product_type: outdoor
+    price: 79.00
+    stock: 58
+    warranty_months: 0   # teaching hook: no warranty at all
+
+orders:
+  # Keyed by order id — the string a customer pastes into a ticket.
+  # `items` holds SKUs and quantities only; get_order expands them with product
+  # names, because "1 x SKU-100" is not an answer a customer can read.
+  ORD-5001:
+    customer_id: C-1001
+    items:
+      - sku: SKU-100
+        qty: 1
+    total: 129.00
+    status: delivered
+    order_date: "2026-07-14"
+    delivered_date: "2026-07-19"
+  ORD-5002:
+    customer_id: C-1001
+    items:
+      - sku: SKU-300
+        qty: 2
+    total: 98.00
+    status: processing
+    order_date: "2026-08-01"
+    delivered_date: null
+  ORD-5003:
+    customer_id: C-1002
+    items:
+      - sku: SKU-200
+        qty: 1
+    total: 199.00
+    status: shipped
+    order_date: "2026-07-28"
+    delivered_date: null
+  ORD-5004:
+    # Teaching hook: delivered 2026-05-07, months outside the 30-day return
+    # window. Every "can I return this?" demo that needs a NO uses this order.
+    customer_id: C-1003
+    items:
+      - sku: SKU-400
+        qty: 1
+    total: 79.00
+    status: delivered
+    order_date: "2026-05-02"
+    delivered_date: "2026-05-07"
+
+shipments:
+  # Keyed by ORDER id, not by tracking id: a customer asks "where is ORD-5003",
+  # never "where is SW-88231". Only one order has shipped — so the other three
+  # are the case that matters more, where get_shipment must return an error the
+  # agent turns into an honest "there is no shipment yet".
+  ORD-5003:
+    carrier: SwiftEx
+    tracking_id: SW-88231
+    status: in_transit
+    eta: "2026-08-08"
+
+refunds:
+  # Keyed by refund id. TCK-002 is Ayesha asking for this refund; REF-9001 is
+  # what the shop opened in response, and it is still only REQUESTED — nobody
+  # has moved any money. issue_refund is the tool that would, which is why v2
+  # defines it and does not give it to the agent.
+  REF-9001:
+    order_id: ORD-5001
+    amount: 129.00
+    status: requested
+    reason: left earcup crackles
+    requested_date: "2026-08-02"

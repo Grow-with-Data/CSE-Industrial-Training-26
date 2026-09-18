@@ -1,0 +1,159 @@
+# ShopWise support inbox — the fixture every session reads.
+#
+# ONE copy for the whole course (PROJECT-SPINE §8). Session folders read
+# ../data/tickets.yml; they never keep their own copy.
+#
+# Customer emails, order IDs and SKUs match PROJECT-SPINE §2 exactly, so a
+# ticket that mentions ORD-5004 really is the order outside the return window.
+# Nothing here is real: these are invented tickets for a fictional store.
+#
+# Fields
+#   id        TCK-0NN, stable — exercises and solutions refer to these
+#   subject   what the customer put in the subject line
+#   body      the message, verbatim including bad grammar and shouting
+#   from      customer email (the key into CUSTOMERS)
+#   category  ground truth, hand-labelled — the S01 exercise counts these,
+#             and from S03 the model has to predict them
+#   received  ISO date, deliberately QUOTED so YAML keeps it a string. Unquoted,
+#             pyyaml turns it into a datetime.date, and json.dumps then refuses
+#             to serialize it — a real trap, met in warmup.py's JSON round trip.
+
+- id: TCK-001
+  subject: "Where is my order?"
+  body: "Hi, I ordered the AeroSound Pro headphones on the 14th and the tracking hasn't moved. Order ORD-5001. Can you tell me when it will arrive?"
+  from: ayesha@example.com
+  category: order_status
+  received: "2026-08-02"
+
+- id: TCK-002
+  subject: "left earcup crackles"
+  body: "The headphones arrived fine but the left earcup crackles at any volume above half. I've had them nine days. I'd like a refund please, not a replacement."
+  from: ayesha@example.com
+  category: refund
+  received: "2026-08-02"
+
+- id: TCK-003
+  subject: "THIS IS THE THIRD TIME I AM WRITING"
+  body: "THIS IS THE THIRD TIME I AM WRITING AND NOBODY HAS REPLIED. I PAID FOR TWO KETTLES ON THE 1ST AND THE ORDER STILL SAYS PROCESSING. EITHER SHIP THEM TODAY OR REFUND ME. ORD-5002. I WILL BE POSTING ABOUT THIS."
+  from: ayesha@example.com
+  category: complaint
+  received: "2026-08-06"
+
+- id: TCK-004
+  subject: "আমার অর্ডার কোথায়?"
+  body: "আসসালামু আলাইকুম। আমি ২৮ তারিখে PulseFit স্মার্টওয়াচ অর্ডার করেছি, ORD-5003. এখনো পাইনি। কুরিয়ার বলছে ট্রানজিটে আছে। আর কত দিন লাগবে জানালে ভালো হয়।"
+  from: tanvir@example.com
+  category: order_status
+  received: "2026-08-04"
+
+- id: TCK-005
+  subject: "Return after 3 months?"
+  body: "I bought the TrailPack 30L backpack back in May, order ORD-5004. The zip has started separating. Can I return it?"
+  from: priya@example.com
+  category: return
+  received: "2026-08-05"
+
+- id: TCK-006
+  subject: "warranty on the backpack"
+  body: "Does the TrailPack 30L come with any warranty at all? The product page doesn't say."
+  from: priya@example.com
+  category: warranty
+  received: "2026-08-05"
+
+- id: TCK-007
+  subject: "Refund status REF-9001"
+  body: "I raised a refund a few days ago, reference REF-9001. It still shows as requested. How long does this normally take?"
+  from: ayesha@example.com
+  category: refund
+  received: "2026-08-07"
+
+- id: TCK-008
+  subject: "kettle out of stock — how long?"
+  body: "The BrewMaster kettle shows out of stock. Do you know when it's back? Happy to wait a week or two but not a month."
+  from: kamal@example.com
+  category: product_question
+  received: "2026-08-03"
+
+- id: TCK-009
+  subject: "charged twice"
+  body: "My card statement shows two charges of 129.00 on the same day for one order. Please check and refund the duplicate."
+  from: kamal@example.com
+  category: billing
+  received: "2026-08-08"
+
+- id: TCK-010
+  subject: "Do the headphones work with an iPhone?"
+  body: "Quick question before I buy — are the AeroSound Pro headphones compatible with iPhone, and do they support multipoint pairing?"
+  from: tanvir@example.com
+  category: product_question
+  received: "2026-08-03"
+
+- id: TCK-011
+  subject: "wrong item delivered"
+  body: "I ordered the smartwatch and received a backpack. Photo attached. I need the watch, not this."
+  from: tanvir@example.com
+  category: complaint
+  received: "2026-08-08"
+
+- id: TCK-012
+  subject: "change delivery address"
+  body: "Can I change the delivery address on ORD-5002 before it ships? I've moved to Chattogram."
+  from: ayesha@example.com
+  category: shipping
+  received: "2026-08-04"
+
+- id: TCK-013
+  subject: "invoice for my company"
+  body: "I need a VAT invoice for order ORD-5003 addressed to my employer rather than to me. Is that possible?"
+  from: tanvir@example.com
+  category: billing
+  received: "2026-08-06"
+
+- id: TCK-014
+  subject: "gold member free shipping?"
+  body: "I've been a customer since 2023 and I'm on the gold tier. Doesn't that include free shipping? I was charged for it."
+  from: kamal@example.com
+  category: shipping
+  received: "2026-08-07"
+
+- id: TCK-015
+  subject: "smartwatch battery drains overnight"
+  body: "Two weeks in and the PulseFit loses about 40% overnight with everything turned off. Is this normal or is it faulty?"
+  from: tanvir@example.com
+  category: warranty
+  received: "2026-08-09"
+
+- id: TCK-016
+  subject: "cancel my order"
+  body: "Please cancel ORD-5002, I found the kettles cheaper elsewhere. It hasn't shipped yet."
+  from: ayesha@example.com
+  category: refund
+  received: "2026-08-05"
+
+- id: TCK-017
+  subject: "no update for 6 days"
+  body: "Tracking SW-88231 hasn't updated in six days. Is the parcel lost? Please either find it or send a replacement."
+  from: tanvir@example.com
+  category: order_status
+  received: "2026-08-09"
+
+- id: TCK-018
+  subject: "is the kettle 220v"
+  body: "Is the BrewMaster kettle 220v and does it come with a UK or a two-pin plug?"
+  from: priya@example.com
+  category: product_question
+  received: "2026-08-04"
+
+- id: TCK-019
+  subject: "worst service ever"
+  body: "your support is a joke. two emails, no reply, and the chat widget just loops. i am done with shopwise."
+  from: priya@example.com
+  category: complaint
+  received: "2026-08-08"
+
+- id: TCK-020
+  subject: "unsubscribe me"
+  body: "Please take me off your marketing emails. I get three a day. Keep the order notifications."
+  from: kamal@example.com
+  category: other
+  received: "2026-08-06"
