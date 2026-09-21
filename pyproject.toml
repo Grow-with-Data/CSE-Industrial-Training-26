@@ -7,9 +7,9 @@ requires-python = ">=3.12"
 # One environment for all 20 sessions. Install once:
 #   uv sync
 # Then select .venv as the Jupyter kernel. Everything a later session needs is
-# already here, so week 8 never opens with a failed install.
+# already here, so week 10 never opens with a failed install.
 dependencies = [
-    # --- the course's core stack (majors locked in CLAUDE.md) ---
+    # --- the core stack, pinned so the whole cohort runs identical versions ---
     "langchain>=1.3.14,<2",
     "langgraph>=1.2.10,<1.3",     # langchain 1.3.x itself caps langgraph at <1.3
     "langchain-google-genai>=4.3.2,<5",
@@ -34,8 +34,7 @@ dependencies = [
     "pydantic>=2.11,<3",
     "pydantic-settings>=2.8",     # typed, validated configuration (S03 — see project/config.py)
     "pyyaml>=6.0",
-    "pillow>=11.0",               # reading the image the model is shown (S01 §7.3)
-    "mermaid-py>=0.8.4",          # diagrams rendered inside notebooks, from S01 on
+    "pillow>=11.0",               # reading the image the model is shown (S01, section 4.3)
 
     # --- from S08: retrieval ---
     "qdrant-client>=1.15",
