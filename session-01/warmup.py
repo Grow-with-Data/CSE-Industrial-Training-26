@@ -107,9 +107,22 @@ def main() -> None:
     print(f"\nParsed back — same subject? {back_to_dict['subject'] == first['subject']}")
 
     # --- Your turn: exercise 3 (⭐⭐ Ticket loader) ---------------------------
-    # Count how many tickets are in each category and print a small report.
-    # Start from an empty dict and use `counts.get(key, 0) + 1` — section 2.6.
-    # That exact pattern reappears in session 10 as how a graph updates state.
+    #
+    # A. Count how many tickets are in each category and print a small report.
+    #    Start from an empty dict and use `counts.get(key, 0) + 1` — section 2.6.
+    #    That exact pattern reappears in session 10 as how a graph updates state.
+    #
+    # B. Do the same for t["from"]: who writes in most?
+    #
+    # C. Then generalise A and B into ONE function, and call it from here:
+    #
+    #        def count_by(tickets: list[dict], field: str) -> dict[str, int]:
+    #            ...
+    #
+    #    count_by(tickets, "category") and count_by(tickets, "from") both work.
+    #    Passing the field NAME as an argument instead of hard-coding it is the
+    #    difference between a script and a tool — and session 5 is entirely
+    #    about writing tools.
 
 
 # This guard means the file can be imported by the exercises notebook without
