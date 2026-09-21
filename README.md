@@ -12,10 +12,16 @@
 
 <p align="center">
   <a href="https://growwithdata.net"><b>Grow with Data</b></a> ·
-  <a href="https://kalimamzad.com">Md Kalim Amzad Chy</a> ·
-  <a href="https://linkedin.com/in/kalimamzad">LinkedIn</a> ·
   <a href="brochure.html">Brochure</a> ·
   <a href="https://how-llm-works.kalimamzad.com/">How LLMs work</a>
+</p>
+
+<p align="center">
+  <sub>
+    Instructor <a href="https://kalimamzad.com">Md Kalim Amzad Chy</a>
+    (<a href="https://linkedin.com/in/kalimamzad">LinkedIn</a>) ·
+    Co-instructor <b>Pranab Barua Arthi</b>
+  </sub>
 </p>
 
 ---
