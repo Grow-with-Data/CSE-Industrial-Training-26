@@ -21,7 +21,7 @@ import yaml
 # below means "the data folder next door to my own folder" — it works no matter
 # which directory you launched Python from, which "data/tickets.yml" does not.
 #
-# labs/session-01/warmup.py  ->  labs/  ->  labs/data/tickets.yml
+# session-01/warmup.py  ->  repo root  ->  data/tickets.yml
 TICKETS_PATH = Path(__file__).resolve().parent.parent / "data" / "tickets.yml"
 
 

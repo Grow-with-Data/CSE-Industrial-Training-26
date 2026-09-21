@@ -14,7 +14,7 @@ import os
 import sys
 from pathlib import Path
 
-# labs/session-01/check_setup.py  ->  labs/
+# session-01/check_setup.py  ->  repo root
 LABS = Path(__file__).resolve().parent.parent
 
 PASS = "PASS"
@@ -38,7 +38,7 @@ else:
     record(
         FAIL,
         "Python version",
-        f"found {version}, need 3.12+. Install it, then re-run `uv sync` in labs/.",
+        f"found {version}, need 3.12+. Install it, then re-run `uv sync` in the repo root.",
     )
 
 
@@ -54,7 +54,7 @@ if not in_venv:
         FAIL,
         "Virtual environment",
         "you are on the system Python. Run this as `uv run python check_setup.py` "
-        "from the labs/ folder, or activate .venv first.",
+        "from the repo root, or activate .venv first.",
     )
 elif running_from == expected_venv.resolve():
     record(PASS, "Virtual environment", f"{running_from}")
@@ -62,7 +62,7 @@ else:
     record(
         WARN,
         "Virtual environment",
-        f"inside a venv, but not labs/.venv ({running_from}). Usually harmless; "
+        f"inside a venv, but not the repo's .venv ({running_from}). Usually harmless; "
         "if imports fail below, this is why.",
     )
 
@@ -101,7 +101,7 @@ if missing:
     record(
         FAIL,
         "Missing packages",
-        f"{', '.join(missing)} — run `uv sync` in the labs/ folder.",
+        f"{', '.join(missing)} — run `uv sync` in the repo root.",
     )
 
 
@@ -113,7 +113,7 @@ if not env_path.exists():
     record(
         FAIL,
         ".env file",
-        f"not found at {env_path}. Run `cp .env.example .env` in labs/, then paste your key.",
+        f"not found at {env_path}. Run `cp .env.example .env` in the repo root, then paste your key.",
     )
 else:
     record(PASS, ".env file", str(env_path))
@@ -131,7 +131,7 @@ else:
             FAIL,
             "GEMINI_API_KEY",
             "empty. Get one free at https://aistudio.google.com/apikey and paste it "
-            "after the `=` in labs/.env (no quotes, no spaces).",
+            "after the `=` in .env (no quotes, no spaces).",
         )
     elif key.startswith("your") or key.endswith("here"):
         record(FAIL, "GEMINI_API_KEY", "still the placeholder text — paste your real key.")
@@ -147,14 +147,14 @@ else:
 
 
 # --- 5. The shared data file -------------------------------------------------
-# labs/data/ is ONE copy shared by all 20 sessions. Session folders read
+# data/ is ONE copy shared by all 20 sessions. Session folders read
 # ../data/tickets.yml — they never keep their own copy.
 tickets_path = LABS / "data" / "tickets.yml"
 if not tickets_path.exists():
     record(
         FAIL,
         "data/tickets.yml",
-        f"not found at {tickets_path}. Are you running from inside labs/session-01/?",
+        f"not found at {tickets_path}. Are you running from inside session-01/?",
     )
 else:
     try:
@@ -168,7 +168,7 @@ else:
         record(FAIL, "data/tickets.yml", f"found but could not be parsed: {exc}")
 
 # The customer photo the notebook hands to the model in §7.3, and that the ⭐⭐⭐
-# exercise reuses. Shared like tickets.yml — one copy in labs/data/.
+# exercise reuses. Shared like tickets.yml — one copy in data/.
 photo_path = LABS / "data" / "images" / "ticket-photo-headphones.jpg"
 if photo_path.exists():
     record(PASS, "data/images/", f"{photo_path.name} ({photo_path.stat().st_size // 1024} KB)")
@@ -176,7 +176,7 @@ else:
     record(
         FAIL,
         "data/images/",
-        f"not found at {photo_path}. Pull the latest labs/ — §7.3 of the notebook needs it.",
+        f"not found at {photo_path}. Pull the latest — §7.3 of the notebook needs it.",
     )
 
 
