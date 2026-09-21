@@ -4,10 +4,11 @@
 
 This is every Python feature the rest of the course needs, and nothing else:
 reading a file, dicts, f-strings, functions with type hints, a small class, and
-JSON in and out. No AI yet — that's session 2. Today we make sure the language
-isn't the thing standing in your way.
+JSON in and out — no model calls, on purpose. Section 2 of the notebook is the
+same material with more explanation; this is it as a script, which is what every
+session from S02 on actually ships.
 
-It is also the scaffold for this session's exercises, so keep it working.
+It is also the scaffold for exercise 3 (Ticket loader), so keep it working.
 """
 
 import json
@@ -105,9 +106,9 @@ def main() -> None:
     back_to_dict = json.loads(as_text)
     print(f"\nParsed back — same subject? {back_to_dict['subject'] == first['subject']}")
 
-    # --- Your turn (exercise ⭐⭐) --------------------------------------------
+    # --- Your turn: exercise 3 (⭐⭐ Ticket loader) ---------------------------
     # Count how many tickets are in each category and print a small report.
-    # Start from an empty dict and use `counts.get(key, 0) + 1`.
+    # Start from an empty dict and use `counts.get(key, 0) + 1` — section 2.6.
     # That exact pattern reappears in session 10 as how a graph updates state.
 
 
