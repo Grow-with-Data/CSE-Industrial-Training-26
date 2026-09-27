@@ -241,7 +241,7 @@ Two sessions a week, Friday + Saturday, 19:30–21:30.
 | # | Session | What you learn | ShopWise |
 |---|---|---|---|
 | S01 | Hello, AI | how LLMs actually work · setup | — |
-| S02 | Talking to the machines | messages, roles, system prompts | v0.1 |
+| S02 | Talking to the machines | calling the API properly · prompt engineering from the OpenAI, Anthropic and Google guides | v0.1 |
 | S03 | From chat to software | structured output you can trust | v0.2 |
 | S04 | One interface to rule them all | the framework trade · observability | v1 |
 | S05 | Give it hands | tools and the agent loop | v2 |
