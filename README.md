@@ -218,12 +218,13 @@ session-05/
 
 ## How to submit your exercises
 
-You hand in exercises through **your own private repo**, which GitHub Classroom creates for you. Only
+You hand in exercises through **your own private repo**, which your instructor creates for you. Only
 you and your instructors can see it: classmates can't open your work, and you can't open theirs.
 This repo stays read-only for everyone.
 
-1. **Once:** open the invite link your instructor shares and accept it. That creates
-   `exercises-<your-github-username>` in the Grow-with-Data organization. Clone it next to this repo.
+1. **Once:** send your GitHub username to your instructor. You'll get an email invitation to
+   `exercises-<your-github-username>` in the Grow-with-Data organization: accept it, then clone that
+   repo next to this one.
 2. **Each session:** do the exercises here, in a copy (`session-03/my-exercises.ipynb`), because the
    notebook needs this repo's `project/` and `data/` folders.
 3. **Submit:** copy the finished notebook into your repo as `session-03/exercises.ipynb`, then commit
