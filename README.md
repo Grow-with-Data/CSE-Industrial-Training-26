@@ -216,12 +216,30 @@ session-05/
 
 ---
 
+## How to submit your exercises
+
+You hand in exercises through **your own private repo**, which GitHub Classroom creates for you. Only
+you and your instructors can see it: classmates can't open your work, and you can't open theirs.
+This repo stays read-only for everyone.
+
+1. **Once:** open the invite link your instructor shares and accept it. That creates
+   `exercises-<your-github-username>` in the Grow-with-Data organization. Clone it next to this repo.
+2. **Each session:** do the exercises here, in a copy (`session-03/my-exercises.ipynb`), because the
+   notebook needs this repo's `project/` and `data/` folders.
+3. **Submit:** copy the finished notebook into your repo as `session-03/exercises.ipynb`, then commit
+   and push. The deadline is the start of the next session; the last push before it is what we mark.
+
+Your submission repo's README has the exact commands. Save the notebook **with its outputs**, and
+put your answers in the ✍️ cells in your own words: that is where the marks are. Never push `.env`.
+
+---
+
 ## Assessment
 
 | Component | Weight | What it is |
 |---|---|---|
 | Attendance | **10%** | 20 sessions, Fri + Sat |
-| Assignments | **20%** | the per-session exercises |
+| Assignments | **20%** | the per-session exercises, submitted to your private repo ([how](#how-to-submit-your-exercises)) |
 | Final project | **50%** | your capstone, demoed in session 20 |
 | Viva (industrial) | **20%** | on what you built here |
 
