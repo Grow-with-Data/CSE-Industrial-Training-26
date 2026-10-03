@@ -1,0 +1,21 @@
+id,category,urgency,sentiment,needs_human,summary,order_ids,days_since_delivery,return_window
+TCK-001,order_status,medium,calm,False,Customer is asking for the tracking status and delivery date of order ORD-5001.,ORD-5001,,unknown
+TCK-002,complaint,high,frustrated,True,Customer wants a refund because the left earcup crackles.,,9,inside
+TCK-003,order_status,high,angry,True,Customer demands shipment or refund for delayed kettle order after no replies.,ORD-5002,,unknown
+TCK-004,order_status,medium,calm,False,Customer is asking for the delivery status of order ORD-5003.,ORD-5003,,unknown
+TCK-005,warranty,low,calm,True,Customer asks about returning a backpack after three months due to a broken zip.,ORD-5004,,unknown
+TCK-006,warranty,low,calm,True,Customer asking if the TrailPack 30L comes with a warranty.,,,unknown
+TCK-007,refund,low,calm,True,Customer asking about processing time for refund REF-9001.,,,unknown
+TCK-008,product_question,low,calm,False,Customer asks when BrewMaster kettle will be back in stock.,,,unknown
+TCK-009,billing,high,frustrated,True,Customer charged twice for a single order and requests a refund.,,,unknown
+TCK-010,product_question,low,calm,False,Customer asks if AeroSound Pro headphones are compatible with iPhone.,,,unknown
+TCK-011,complaint,high,frustrated,True,Customer received a backpack instead of the ordered smartwatch.,,,unknown
+TCK-012,shipping,medium,calm,False,Customer wants to change the delivery address for order ORD-5002.,ORD-5002,,unknown
+TCK-013,billing,low,calm,True,Customer requests a VAT invoice addressed to their employer for order ORD-5003.,ORD-5003,,unknown
+TCK-014,shipping,medium,frustrated,True,Customer asking why gold membership did not include free shipping.,,,unknown
+TCK-015,warranty,medium,calm,True,Customer asking if rapid overnight battery drain is a product fault.,,14,inside
+TCK-016,refund,medium,calm,True,Customer wants to cancel unfulfilled order and get a refund.,ORD-5002,,unknown
+TCK-017,order_status,medium,frustrated,False,"Tracking SW-88231 hasn't updated in six days, customer asks if parcel is lost.",,,unknown
+TCK-018,product_question,low,calm,False,Customer asking about kettle voltage and plug type.,,,unknown
+TCK-019,complaint,high,angry,True,"Customer complains about ignored emails and broken chat, threatening to leave.",,,unknown
+TCK-020,other,low,calm,False,Customer requests to be removed from marketing emails.,,,unknown
